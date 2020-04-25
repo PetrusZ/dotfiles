@@ -1,0 +1,20 @@
+[core]
+    ; gitproxy = socks5://192.168.2.1:23456
+[http]
+	; proxy = socks5://192.168.2.1:23456
+[https]
+	; proxy = socks5://192.168.2.1:23456
+[alias]
+	st = status
+	co = checkout
+	ci = commit
+	br = branch
+	unstage = reset HEAD
+	last = log -1
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+[user]
+	email = silencly07@gmail.com
+	name = Petrus.Z
+	signingkey = 71B321E14F898C3D
+[commit]
+	gpgsign = true

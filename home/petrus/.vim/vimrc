@@ -1,0 +1,1594 @@
+" =====================================================================================
+"
+"       Filename:  .vimrc
+"
+"    Description:  vim配置文件
+"
+"        Version:  3.0
+"        Created:  2020-02-06 16:15
+"
+"         Author:  Petrus(silencly07@gmail.com)
+"      Copyright:  Copyright (c) 2018, Petrus
+"
+" ====================================================================================
+"
+"  < 特性介绍 >"{{{
+" 插件管理器
+" ==========
+" vim-plug
+" --------
+" 并行安装、更新，支持hook，查看updatediff
+"
+" 代码补全
+" ========
+" YouCompleteMe, Ultisnips
+" ------------------------
+" 完整支持c/c++代码补全，支持常见语言代码补全与snippet，并支持跳转代码功能
+"
+" 语法检查
+" ========
+" ale异步语法检查，支持自定义语法引擎。YouCompleteMe支持完整的C/C++语法检查
+"
+" C/C++
+" =====
+" ccls, coc.nvim, vim-lsp-cxx-highlight
+" ---------------
+" LSP sever and client
+"
+" cpp-enhanced-highlight
+" ----------------------
+" c++11/14/17增强高亮
+"
+" A.vim
+" -----
+" 快速从源文件切换到头文件
+"
+" 快速跳转
+" ========
+" matchit
+" -------
+" `%`快速跳转到匹配的括号
+"
+" easymotion
+" ----------
+" 更加方便、快速的vim搜索
+"
+" IDE特性
+" =======
+" nerdtree, tagbar, undotree
+" -----------------------------
+" 侧边栏浏览文件系统、代码结构、undo历史
+"
+" gutentags, gutentags_plus
+" -------------------------
+" 自动生成、管理tags，支持50+种语言
+"
+" tabular, nerdcommenter
+" ----------------------
+" 快速对齐与快速注释
+"
+" ack, ctrlp, ctrlp-funky
+" -----------------------
+" 快速搜索代码、文件、函数
+"
+" gitgutter
+" ---------
+" 在vim侧边显示文件的git diff状态，支持stage、undo、preview部分改变
+"
+" indentLine
+" ----------
+" 显示缩进线
+"
+" airline
+" -------
+" 状态栏增强
+"
+" sublime特性
+" ===========
+" multiple-cursors and ctrlsf
+" ---------------------------
+" 多光标编辑与ctrlsf搜索分窗口即时显示
+"
+" 其他
+" ====
+" vimwiki
+" -------
+" 个人wiki系统，可方便转换为html网页
+"
+" vim-markdown, makrdown-preview.vim
+" ----------------------------------
+" markdown语法高亮与实时预览等功能
+"
+" asyncrun.vim
+" ------------
+" 异步运行shell命令
+"
+" youdao-translater
+" -----------------
+" 有道翻译
+"
+" 依赖软件
+" ========
+" git
+" ctags/global/pygments
+" llvm/clang
+" ripgrep
+" lsp servers
+" -----------------------------------------------------------------------------"}}}
+"  < 常用快捷键 > {{{
+" -----------------------------------------------------------------------------
+" <F1>       切换Location list
+" <F2>       打开quickfix
+" <F3>       打开NERDTree
+" <F4>       打开tagbar
+" <F5>       打开undo tree
+" <F6>       打开Vista
+
+" <F9>       开启markdown预览
+" <F10>      关闭markdown预览
+" <F11>      终端最大、最小化(gnome-terminal)
+
+" gD         查询变量，只在本文件中
+" gd         查询变量, 只在本函数中
+" g;         跳转到change list中较旧的位置
+" g,         跳转到change list中较新的位置
+" [i         查询变量的定义
+" [<Tab>     跳到变量定义的地方
+" ``         返回原处(仅在同一文件内有效)
+" `.         回到最后一次修改的地方
+" mm         标记高亮书签
+" <leader>a  启动ag进行全局查找 :Ag [options] pattern [PATH]
+" <leader>u  显示最近打开的文件
+" <leader>h  取消搜索高亮显示
+" <leader>c  清除所有无用的空格
+" <leader>ev 快速打开.vimrc
+" <leader>sv 快速重载.vimrc
+" <C-o>      跳转到jump list中较新的位置
+" <C-i>      跳转到jump list中较新的位置
+" <C-e>      停止补全并回到原来文字
+" K          普通模式:man在光标下的函数
+" %          在匹配的括号间跳转(matchup)
+
+" windows
+" ----------------------------------------------------------------
+" <C-c>      关闭分屏窗口
+" <C-w><C-o> 将当前的分屏窗口最大化
+" <C-j><C-k><C-h><C-l>   在分屏窗口间浏览
+"
+" airline tab
+" -----------
+" <learder>1-9      选择index为1-9的airline tab
+" <A-m>             选择下一个airline tab
+" <A-n>             选择上一个airline tab
+" <A-d>             关闭当前airline tab或buffer
+
+" macro
+" ----------------------------------------------------------------
+" qa 将之后的所有键盘操作录制下来，直到再次在命令模式按下q，并存储在a中 " @a 执行刚刚记录在a里面的键盘操作
+" @@ 执行上一次的macro操作
+
+" 十六进制编辑
+" ----------------------------------------------------------------
+" :%!xxd     把所有的行(%)用本地(!)的xxd程序打开。
+" :%!xxd -r  返回正常显示
+" xxd本是linux下一个显示、编辑、转换二进制的命令。
+"
+" coc.nvim
+" ----------------------------------------------------------------
+" Press ? on normal mode to get help for coc list.
+" (i)<tab>   选择补全项
+" <cr>       确认补全/展开snip
+" <c+space>  强制触发补全
+" (n/x)<tab> 选择下一个可选区域
+" K          显示文档
+"
+" :Format     格式化当前buffer
+" :Fold       折叠当前buffer
+" :OR         organize import of current buffer
+"
+" vim-matchup
+" ----------------------------------------------------------------
+" Adds motions g%, [%, ]%, and z%.
+" Combines these motions into convenient text objects i% and a%
+"
+" CtrlSF
+" ----------------------------------------------------------------
+" <leader>sf查询光标下的词
+" <leader>sfr重新打开CtrlSF
+"  In CtrlSF window:
+" o, Enter - Jump to file that contains the line under cursor.
+" t - Like o but open file in a new tab.
+" p - Like o but open file in a preview window.
+" O - Like o but always leave CtrlSF window opening.
+" T - Lkie t but focus CtrlSF window instead of opened new tab.
+" q - Quit CtrlSF window.
+" <C-J> - Move cursor to next match.
+" <C-K> - Move cursor to previous match.
+"
+"  In preview window:
+" q - Close preview window.
+
+" A.vim
+" ----------------------------------------------------------------
+" :A switches to the header file corresponding to the current file being edited (or vise versa)
+" :AS splits and switches
+" :AV vertical splits and switches
+" :AT new tab and switches
+" :AN cycles through matches
+" :IH switches to file under cursor
+" :IHS splits and switches
+" :IHV vertical splits and switches
+" :IHT new tab and switches
+" :IHN cycles through matches
+" <Leader>ih switches to file under cursor
+" <Leader>is switches to the alternate file of file under cursor (e.g. on  <foo.h> switches to foo.cpp)
+" <Leader>ihn cycles through matches
+
+" Tagbar
+" ----------------------------------------------------------------
+" s         可按正序和逆序排序
+" <space>   在名称上按空格键可看到它的原型
+" p         光标停在tagbar栏，而代码跳到目标位置
+" <c-p>     跳到上一个类别
+" <c-n>     跳到下一个类别
+" x         在放大和还原tagbar栏间切换
+" q         关闭tagbar栏
+
+" vim-multiple-cursor插件
+" ----------------------------------------------------------------
+" <C-n>     multi_cursor_next(start)_key
+" <C-p>     multi_cursor_prev_key
+" <C-x>     multi_cursor_skip_key
+" <ESC>     multi_cursor_quit_key
+" v         enter normal mode(after marked all locations with <C-n>
+"
+" coc-multiple-cursor
+" ----------------------------------------------------------------
+" <C-n>     multi cursor_next(start) key
+" <C_x>     multi cursor select all
+" m         operator(use in text object)
+" :CocSearch
+"
+" vim-markdown插件
+" ----------------------------------------------------------------
+" gx        open the link under the cursor in the same browser
+" ge        open the link under the cursor in Vim for editing. Useful for relative markdown links.
+" ]]        go to next header
+" [[        go to previous header
+" ][        go to next sibling header if any
+" []        go to previous sibling header if any
+" ]c        go to Current header
+" ]u        go to parent header (Up)
+" :HeaderDecrease       Decrease level of all headers in buffer
+" :HeaderIncrease       Increase level of all headers in buffer
+" :SetexToAtx           Convert all Setex style headers in buffer to Atx. If a range is given, only operate on the range.
+" :TableFormat          Format the table under the cursor
+" :Toc                  create a quickfix vertical window navigable table of contents with the headers
+
+" vim-easy-align插件
+" ----------------------------------------------------------------
+" 1. `ga`` key in visual mode, or `ga` followed by a motion or a text object to start interactive mode
+" 2. (Optional) Enter keys to cycle between alignment mode (left, right, or center)
+" 3. (Optional) N-th delimiter (default: 1)
+"       * 1 Around the 1st occurrences of delimiters
+"       * 2 Around the 2nd occurrences of delimiters
+"       * ...
+"       * * Around all occurrences of delimiters
+"       * ** Left-right alternating alignment around all delimiters
+"       * - Around the last occurrences of delimiters (-1)
+"       * -2 Around the second to last occurrences of delimiters
+"       * ...
+" 4. Delimiter key (a single keystroke; <Space>, =, :, ., |, &, #, ,) or \
+"       an arbitrary regular expression followed by <CTRL-X>
+" 5. Use `<CTRL-P>` to switch between live/nomal interactive mode, or quit from live interactive mode.
+"
+" eunuch.vim插件
+" ----------------------------------------------------------------
+" :Delete: Delete a buffer and the file on disk simultaneously.
+" :Unlink: Like :Delete, but keeps the now empty buffer.
+" :Move: Rename a buffer and the file on disk simultaneously.
+" :Rename: Like :Move, but relative to the current file's containing directory.
+" :Chmod: Change the permissions of the current file.
+" :Mkdir: Create a directory, defaulting to the parent of the current file.
+" :Cfind: Run find and load the results into the quickfix list.
+" :Clocate: Run locate and load the results into the quickfix list.
+" :Lfind/:Llocate: Like above, but use the location list.
+" :Wall: Write every open window. Handy for kicking off tools like guard.
+" :SudoWrite: Write a privileged file with sudo.
+" :SudoEdit: Edit a privileged file with sudo.
+" File type detection for sudo -e is based on original file name.
+" New files created with a shebang line are automatically made executable.
+"
+" fugitive.vim插件
+" ----------------------------------------------------------------
+" :G/:Gstatus   --  Enhanced version of git status（Press g? to see help)
+" :Gedit/:Gsplit/:Gvsplit/:Gtabedit     --   View/edit any blob, tree, commit, or tag in the repository
+" :Gdiffsplit   --  split diff staged version and working tree version
+" :Gcommit/:Gmerge/:Grebase     --  Commit, merge, and rebase and using Vim edit commit messages and rebase todo list.
+" :Gpush/:Gfetch/:Gpull     --  Send and retrieve upstream changes.
+" :Gblame   --  Brings up an interactive vertical split with git blame output.
+" :Gmove    --  Does a git mv on a file and simultaneously renames the buffer.
+" :Gdelete  --  Does a git rm on a file and simultaneously deletes the buffer.
+" :Ggrep    --  Search the work tree (or any arbitrary commit) with git grep,
+"       skipping over that which is not tracked in the repository.
+" :Gclog/Gllog   -- Load all previous commits into the quickfix or location list.
+"       Give them a range to iterate over every change to that portion of the current file.
+" :Git mergetool    --  Loads conflicts into the quickfix list.
+" :Git difftool     --  Loads conflicts into the quickfix list for any arbitrary set of changes.
+" :Gread    --  A variant of `git checkout -- filename`
+" :Gwrite   --  Writes to both the work tree and index versions of a file,
+"       making it like git add when called from a work tree file
+"       and like git checkout when called from the index or a blob in history.
+" :Gbrowse  --  Open the current file on the web front-end, with optional line range.
+" -----------------------------------------------------------------------------}}}
+"  < 选项设置 >"{{{
+" -----------------------------------------------------------------------------
+set nocompatible                                    " 设置不兼容vi
+set expandtab                                       " 设置tab自动转为合适数量的空格
+" set tabstop=8
+set shiftwidth=4                                    " 设置tab的间隔
+set softtabstop=4                                   " 四个空格代表一个tab
+set showmatch                                       " 在输入括号时光标会短暂地跳到与之相匹配的括号处
+set showcmd                                         " 命令模式下，在底部显示，当前键入的指令
+set autoindent                                      " 设置自动缩进
+set smartindent                                     " 设置智能缩进
+set cindent                                         " 打开 C/C++ 语言缩进优化
+set nowrap                                          " 不自动折行
+set linebreak                                       " 不在单词中间进行换行
+set number                                          " 设置是否显示行
+set textwidth=500                                   " 文本行宽度超过500时自动加回车换回
+set encoding=utf-8                                  " 设置工作编码为utf-8
+set fileencoding=utf-8                              " 文件默认编码
+" 打开文件时自动尝试下面顺序的编码
+set fileencodings=ucs-bom,utf-8,gbk,GB18030,cp936,big5,euc-jp,euc-kr,latin1
+set helplang=cn                                     " 帮助中文支持
+set mouse=a                                         " 设置粘贴和复制
+set ignorecase                                      " 设置搜索时忽略大小写
+set smartcase                                       " 如果有一个大写字母，则切换到大小写敏感查找
+set hlsearch                                        " 高亮搜索结果
+set incsearch                                       " 查找输入时动态增量显示查找结果
+set clipboard=unnamedplus                           " 设置剪贴板
+set foldmethod=marker                               " 设置折叠方式为标记折叠
+" set foldmethod=indent                               " 设置折叠方式为缩进折叠
+" set foldlevel=500                                   " 默认打开所有折叠
+set confirm                                         " 关闭时如果存在未保存的文件出现提示
+set scrolloff=5                                     " 距离顶部或底部还有5行的时候就开始滚动屏幕
+set conceallevel=2                                  " 可隐藏文字等级
+set concealcursor=c                                 " 在什么模式下光标所在行会被隐藏
+set updatetime=200                                  " swp与CursorHold autocmd的更新时间，目前主要用于gitgutter插件更新速度
+set wildmenu                                        " 在编辑命令行时，按补全键后，临时在状态栏位置显示补全提示
+set autochdir                                       " 将当前路径自动切换到当前编辑的文件所在的目录
+set noshowmode                                      " 关闭mode在cmd中的提示，方便echodoc显示
+set lazyredraw                                      " 延迟绘制（提升性能）
+set bs=eol,start,indent                             " 设置 Backspace 键模式
+set errorformat+=[%f:%l]\ ->\ %m,[%f:%l]:%m         " 错误格式
+set listchars=tab:\|\ ,trail:.,extends:>,precedes:< " 设置分隔符可视
+set formatoptions+=m                                " 如遇Unicode值大于255的文本，不必等到空格再折行
+set formatoptions+=B                                " 合并两行中文时，不在中间加空格
+" set complete-=k complete+=k                         " 将字典补全添加到默认补全列表中
+set completeopt=longest,menu                        " 使用弹出菜单来显示可能的补全并显示当前选择补全的额外信息
+set timeout timeoutlen=500 ttimeoutlen=50           " 设置映射延迟为500ms，键码延迟为50ms
+
+" coc.nvim/lsp
+set hidden                " if hidden is not set, TextEdit might fail.
+set nobackup              " Some servers have issues with backup files, see #649
+set nowritebackup
+set cmdheight=2           " Better display for messages
+" set signcolumn=yes      " always show signcolumns
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+set cedit=""
+
+" set vim dir
+" // 代表使用绝对路径，避免重名问题
+set backupdir=~/.vim/.backup//
+set directory=~/.vim/.swp//
+set undodir=~/.vim/.undo//
+
+" 文件搜索和补全时忽略下面扩展名
+set suffixes=.bak,~,.o,.h,.info,.swp,.obj,.pyc,.pyo,.egg-info,.class
+
+set wildignore=*.o,*.obj,*~,*.exe,*.a,*.pdb,*.lib "stuff to ignore when tab completing
+set wildignore+=*.so,*.dll,*.swp,*.egg,*.jar,*.class,*.pyc,*.pyo,*.bin,*.dex
+set wildignore+=*.zip,*.7z,*.rar,*.gz,*.tar,*.gzip,*.bz2,*.tgz,*.xz    " MacOSX/Linux
+set wildignore+=*DS_Store*,*.ipch
+set wildignore+=*.gem
+set wildignore+=*.png,*.jpg,*.gif,*.bmp,*.tga,*.pcx,*.ppm,*.img,*.iso
+set wildignore+=*.so,*.swp,*.zip,*/.Trash/**,*.pdf,*.dmg,*/.rbenv/**
+set wildignore+=*/.nx/**,*.app,*.git,.git
+set wildignore+=*.wav,*.mp3,*.ogg,*.pcm
+set wildignore+=*.mht,*.suo,*.sdf,*.jnlp
+set wildignore+=*.chm,*.epub,*.pdf,*.mobi,*.ttf
+set wildignore+=*.mp4,*.avi,*.flv,*.mov,*.mkv,*.swf,*.swc
+set wildignore+=*.ppt,*.pptx,*.docx,*.xlt,*.xls,*.xlsx,*.odt,*.wps
+set wildignore+=*.msi,*.crx,*.deb,*.vfd,*.apk,*.ipa,*.bin,*.msu
+set wildignore+=*.gba,*.sfc,*.078,*.nds,*.smd,*.smc
+set wildignore+=*.linux2,*.win32,*.darwin,*.freebsd,*.linux,*.android
+
+" set viminfo file location
+set viminfo+=n~/.vim/.info/viminfo
+
+" persistent undo
+if has("persistent_undo")
+    set undofile
+    set undolevels=500 "maximum number of changes that can be undone
+    set undoreload=10000 "maximum number lines to save for undo on a buffer
+endif
+
+scriptencoding utf-8
+
+syntax enable "允许 Vim 自带脚本根据文件类型自动设置缩进等
+filetype plugin indent on          "开启文件类型插件和缩进识别功能
+
+" 载入配置文件
+source $HOME/.vim/plugin_list.vim
+" -----------------------------------------------------------------------------"}}}
+" < GUI模式 配置 >"{{{
+" -----------------------------------------------------------------------------
+if has('gui_running')
+    set guioptions-=T
+    set guioptions+=e
+    " set t_Co=256
+    set guitablabel=%M\ %t
+    " set guifont=Monospace\ 11 " 设置字体大小
+endif
+" -----------------------------------------------------------------------------"}}}
+"  < autocmd 配置 >{{{
+" -----------------------------------------------------------------------------
+" 手动折叠
+"autocmd BufWinLeave .vimrc silent mkview      "vimrc文件自动保存折叠
+"autocmd BufWinEnter .vimrc silent loadview    "vimrc自动载入折叠
+
+" 设置只在特定的文件类型才折行
+" autocmd FileType vimwiki set wrap
+" autocmd BufEnter * if &filetype == "" | set wrap | endif
+" autocmd BufEnter * if &filetype == "vimwiki" | set wrap | endif
+
+augroup Petrus
+    autocmd!
+
+    " 设置文件类型
+    autocmd BufRead,BufNewFile .vimperatorrc		set filetype=vim
+    autocmd BufRead,BufNewFile *.cron		set filetype=crontab
+    " autocmd BufRead,BufNewFile *.conf		set filetype=conf
+
+    " disable Coc completion in vimwiki
+    autocmd FileType vimwiki let b:coc_suggest_disable = 1 | silent! unmap <buffer> <leader>wh| silent! unmap <buffer> <leader>whh
+    " autocmd FileType vimwiki execute "silent! CocDisable"
+    " 保存时自动删除空白
+    " autocmd BufWritePre * | undojoin | FixWhitespace
+    " autocmd BufWritePre * if count(['vimwiki','markdown'],&filetype)
+        " \ | undojoin | Neoformat
+        " \ | endif
+
+    " mutt
+    autocmd BufRead /tmp/neomutt-* set textwidth=72 | set colorcolumn=72
+
+    " markdown 允许自动换行
+    autocmd FileType markdown setlocal wrap
+
+    " 高亮当前行
+    autocmd BufEnter,WinEnter,InsertLeave * setl cursorline
+    autocmd BufLeave,WinLeave,InsertEnter * setl nocursorline
+
+    autocmd SourcePre $MYVIMRC echomsg 'Loading/Sourcing ' . expand('<afile>') . '!'
+
+    " 可以自动切换到文件所在的目录
+    " autocmd BufEnter * :lchdir %:p:h
+
+    " 回到上次编辑的位置
+    autocmd BufReadPost *
+          \ if ! exists("g:leave_my_cursor_position_alone") |
+          \     if line("'\"") > 0 && line ("'\"") <= line("$") |
+          \         exe "normal! g'\"" |
+          \     endif |
+          \ endif
+augroup END
+" -----------------------------------------------------------------------------"}}}
+"  < 键盘映射 配置 >"{{{
+" -----------------------------------------------------------------------------
+" easier navigation between split windows
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+nnoremap <c-c> <c-w>c
+nnoremap <M-j> <c-w>+
+nnoremap <M-k> <c-w>-
+nnoremap <M-h> <c-w><
+nnoremap <M-l> <c-w>>
+
+nnoremap j gj
+nnoremap k gk
+
+" emacs shortcut
+inoremap <C-c> <ESC>
+inoremap <C-a> <HOME>
+inoremap <C-e> <END>
+inoremap <C-f> <Right>
+inoremap <C-b> <Left>
+inoremap <expr> <C-d> col('.')>strlen(getline('.'))?"\<Lt>C-d>":"\<Lt>Del>"
+inoremap <M-f> <S-Right>
+inoremap <M-b> <S-Left>
+inoremap <M-d> <C-O>dw
+inoremap <M-n> <Down>
+inoremap <M-p> <Up>
+
+cnoremap <C-a> <HOME>
+cnoremap <C-f> <Right>
+cnoremap <C-b> <Left>
+cnoremap <expr> <C-d> getcmdpos()>strlen(getcmdline())?"\<Lt>C-d>":"\<Lt>Del>"
+cnoremap <M-d> <S-Right><C-W>
+
+" original key
+cnoremap <C-X><C-a> <C-a>
+cnoremap <C-X><C-f> <C-f>
+
+" w!!强制sudo存储
+" cmap w!! %!sudo tee >/dev/null %
+cabbrev w!! %!sudo tee >/dev/null %
+
+" set <Leader> key
+let g:mapleader="\<space>"
+" set <localleader> key
+let g:maplocalleader = ','
+
+" imap <C-l> /*
+" imap jk <Esc>
+
+" no highlight
+map <silent> <leader><Tab> :nohlsearch<CR>
+
+" navigate chunks of current buffer
+nmap [g <Plug>(coc-git-prevchunk)
+nmap ]g <Plug>(coc-git-nextchunk)
+" create text object for git chunks
+omap ig <Plug>(coc-git-chunk-inner)
+xmap ig <Plug>(coc-git-chunk-inner)
+omap ag <Plug>(coc-git-chunk-outer)
+xmap ag <Plug>(coc-git-chunk-outer)
+
+" markdown preview
+nmap <silent> <F9> <Plug>MarkdownPreview
+imap <silent> <F9> <Plug>MarkdownPreview
+nmap <silent> <F10> <Plug>MarkdownPreviewStop
+imap <silent> <F10> <Plug>MarkdownPreviewStop
+" -----------------------------------------------------------------------------"}}}
+"  < 修复功能键 配置 >"{{{
+" -----------------------------------------------------------------------------
+" enable alt key in terminal vim
+if has('nvim') == 0 && has('gui_running') == 0
+	set ttimeout
+	if $TMUX != ''
+		set ttimeoutlen=30
+	elseif &ttimeoutlen > 80 || &ttimeoutlen <= 0
+		set ttimeoutlen=80
+	endif
+	function! s:meta_code(key)
+		if get(g:, 'altmeta_skip_meta', 0) == 0
+			exec "set <M-".a:key.">=\e".a:key
+		endif
+	endfunc
+
+	for i in range(10)
+		call s:meta_code(nr2char(char2nr('0') + i))
+	endfor
+	for i in range(26)
+		call s:meta_code(nr2char(char2nr('a') + i))
+		call s:meta_code(nr2char(char2nr('A') + i))
+	endfor
+	for c in [',', '.', '/', ';', '{', '}']
+		call s:meta_code(c)
+	endfor
+	for c in ['?', ':', '-', '_', '+', '=', "'"]
+		call s:meta_code(c)
+	endfor
+
+	function! s:key_escape(name, code)
+		if get(g:, 'altmeta_skip_fn', 0) == 0
+			exec "set ".a:name."=\e".a:code
+		endif
+	endfunc
+
+	call s:key_escape('<F1>', 'OP')
+	call s:key_escape('<F2>', 'OQ')
+	call s:key_escape('<F3>', 'OR')
+	call s:key_escape('<F4>', 'OS')
+	call s:key_escape('<S-F1>', '[1;2P')
+	call s:key_escape('<S-F2>', '[1;2Q')
+	call s:key_escape('<S-F3>', '[1;2R')
+	call s:key_escape('<S-F4>', '[1;2S')
+	call s:key_escape('<S-F5>', '[15;2~')
+	call s:key_escape('<S-F6>', '[17;2~')
+	call s:key_escape('<S-F7>', '[18;2~')
+	call s:key_escape('<S-F8>', '[19;2~')
+	call s:key_escape('<S-F9>', '[20;2~')
+	call s:key_escape('<S-F10>', '[21;2~')
+	call s:key_escape('<S-F11>', '[23;2~')
+	call s:key_escape('<S-F12>', '[24;2~')
+endif
+" -----------------------------------------------------------------------------"}}}
+" < colorscheme 配置 >"{{{
+" -----------------------------------------------------------------------------
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+set termguicolors         " support true color terminal
+set background=dark
+
+" colorscheme tango
+" colorscheme yowish
+" colorscheme solarized8
+" colorscheme flattened_dark
+
+" let g:molokai_original = 1
+" let g:rehash256 = 1
+" colorscheme molokai
+
+" let g:gruvbox_contrast_dark="hard"
+let g:gruvbox_sign_column="bg0"
+colorscheme gruvbox
+"
+" let g:seoul256_background = 234
+" colorscheme seoul256
+
+" 设置背景透明
+" highlight Normal guibg=NONE ctermbg=NONE
+" 设置注释斜体
+highlight Comment cterm=italic gui=italic
+" SignColumn背景透明
+highlight clear SignColumn
+
+" -----------------------------------------------------------------------------"}}}
+"  < ale 插件配置 >"{{{
+" -----------------------------------------------------------------------------
+" let g:ale_fix_on_save = 0
+
+" Disable c/cpp linter for conflict with YouCompleteMe
+let g:ale_linters = {'c': ['cppcheck'], 'cpp': ['cppcheck'], 'python': ['flake8'], 'vim':[]}
+let g:ale_fixers = {'python':['autopep8']}
+
+" • ✹
+let g:ale_sign_error = '✹'
+let g:ale_sign_warning = '✹'
+
+" python
+let g:ale_python_flake8_options='--ignore=E501'
+" --ignore=E114,E116,E131
+" --ignore=E225,E124,E712,E116
+
+" cppcheck
+" 关闭默认的风格检查
+let g:ale_c_cppcheck_options = ''
+let g:ale_cpp_cppcheck_options = ''
+" -----------------------------------------------------------------------------"}}}
+"  < coc.nvim 插件配置 >"{{{
+" -----------------------------------------------------------------------------
+" Press ? on normal mode to get help for coc list.
+
+let g:airline#extensions#coc#enabled = 1
+let g:UltiSnipsExpandTrigger = '<C-t>'
+
+let g:coc_snippet_next = '<C-j>'
+let g:coc_snippet_prev = '<C-k>'
+
+" Use chrome developer tools
+" Open url chrome://inspect in chrome,
+" let g:coc_node_args = ['--nolazy', '--inspect-brk=6045']
+
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" Make <tab> used for trigger completion, completion confirm, snippet expand and jump like VSCode.
+" inoremap <silent><expr> <TAB>
+      " \ pumvisible() ? coc#_select_confirm() :
+      " \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      " \ <SID>check_back_space() ? "\<TAB>" :
+      " \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" 使用 <CR> 直接确认补全，并触发 coc.nvim 的 `formatOnType` 功能
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+            \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" Or use `complete_info` if your vim support it, like:
+" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [d <Plug>(coc-diagnostic-prev)
+nmap <silent> ]d <Plug>(coc-diagnostic-next)
+
+" multi cursor
+nmap <expr> <silent> <C-n> <SID>select_current_word()
+xmap <silent> <C-n> <Plug>(coc-cursors-range)
+" use normal command like `<leader>xi(`
+nmap m <Plug>(coc-cursors-operator)
+nmap <silent> <C-x> :CocCommand document.renameCurrentWord<CR>
+" :CocSearch -w [word]
+
+function! s:select_current_word()
+  if !get(g:, 'coc_cursors_activated', 0)
+    return "\<Plug>(coc-cursors-word)"
+  endif
+  return "*\<Plug>(coc-cursors-word):nohlsearch\<CR>"
+endfunc
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocActionAsync('doHover')
+  endif
+endfunction
+
+augroup coc
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Create mappings for function text object, requires document symbols feature of languageserver.
+" 选择函数内所有行，默认映射到 `if` 。
+" 例如：使用 `cif` 重写当前函数。
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+" use `:OR` for organize import of current buffer
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+" -----------------------------------------------------------------------------"}}}
+"  < gutentags/preview 插件配置 >"{{{
+" -----------------------------------------------------------------------------
+let $GTAGSLABEL = 'native-pygments'
+let $GTAGSCONF = '/usr/share/gtags/gtags.conf'
+
+" enable gtags module
+" NOTE: ]g not function?
+" NOTE: issues: https://github.com/ludovicchabant/vim-gutentags/issues/225#issuecomment-581102892
+" let g:gutentags_modules = ['ctags', 'gtags_cscope']
+let g:gutentags_modules = ['gtags_cscope']
+
+" config project root markers.
+let g:gutentags_project_root = ['.root', '.git', 'compile_commands.json']
+
+" generate datebases in my cache directory, prevent gtags files polluting my project
+let g:gutentags_cache_dir = expand('~/.cache/tags')
+
+" forbid gutentags adding gtags databases
+let g:gutentags_auto_add_gtags_cscope = 0
+
+let g:gutentags_define_advanced_commands = 1
+
+" disable tgutentags_plus he default keymaps
+let g:gutentags_plus_nomap = 1
+
+" change focus to quickfix window after search (optional).
+let g:gutentags_plus_switch = 1
+
+" vim-preview
+" Quickfix list中，p开启preview ,P关闭preview
+autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>
+autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<cr>
+
+" TODO: 更新快捷键，alt已被i3使用
+noremap <m-u> :PreviewScroll -1<cr>
+noremap <m-d> :PreviewScroll +1<cr>
+inoremap <m-u> <c-\><c-o>:PreviewScroll -1<cr>
+inoremap <m-d> <c-\><c-o>:PreviewScroll +1<cr>
+" -----------------------------------------------------------------------------"}}}
+"  < nerdcommenter 插件配置 >"{{{
+" -----------------------------------------------------------------------------
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+" Disable default mappings
+let g:NERDCreateDefaultMappings = 0
+" 禁止 nerdcommenter 按缩进注释
+let g:NERDDefaultAlign = 'left'
+" -----------------------------------------------------------------------------"}}}
+"  < Neoformat 插件配置 >"{{{
+" -----------------------------------------------------------------------------
+" Enable alignment
+let g:neoformat_basic_format_align = 1
+" Enable tab to spaces conversion
+let g:neoformat_basic_format_retab = 1
+" Enable trimmming of trailing whitespace
+let g:neoformat_basic_format_trim = 1
+
+" Run a formatter on save
+" augroup fmt
+  " autocmd!
+  " autocmd BufWritePre * undojoin | Neoformat
+" augroup END
+" -----------------------------------------------------------------------------"}}}
+"  < LeaderF 插件配置 >"{{{
+" Once LeaderF is launched:
+" <C-C>, <ESC> : quit from LeaderF.
+" <C-R> : switch between fuzzy search mode and regex mode.
+" <C-F> : switch between full path search mode and name only search mode.
+" <Tab> : switch to normal mode.
+" <C-V>, <S-Insert> : paste from clipboard.
+" <C-U> : clear the prompt.
+" <C-W> : delete the word before the cursor in the prompt.
+" <C-J>, <C-K> : navigate the result list.
+" <Up>, <Down> : recall last/next input pattern from history.
+" <2-LeftMouse> or <CR> : open the file under cursor or selected(when
+"                         multiple files are selected).
+" <C-X> : open in horizontal split window.
+" <C-]> : open in vertical split window.
+" <C-T> : open in new tabpage.
+" <F5>  : refresh the cache.
+" <C-LeftMouse> or <C-S> : select multiple files.
+" <S-LeftMouse> : select consecutive multiple files.
+" <C-A> : select all files.
+" <C-L> : clear all selections.
+" <BS>  : delete the preceding character in the prompt.
+" <Del> : delete the current character in the prompt.
+" <Home>: move the cursor to the begin of the prompt.
+" <End> : move the cursor to the end of the prompt.
+" <Left>: move the cursor one character to the left.
+" <Right> : move the cursor one character to the right.
+" <C-P> : preview the result.
+" <C-Up> : scroll up in the popup preview window.
+" <C-Down> : scroll down in the popup preview window.
+"
+" cmdHistory/searchHistory/command only mappings:
+"     <C-o> : edit command under cursor.
+"
+let g:Lf_WorkingDirectoryMode = 'Ac'
+let g:Lf_CacheDirectory = $HOME."/.cache"
+let g:Lf_RootMarkers = ['.git', '.hg', '.svn', '.root']
+" don't show the help in normal mode
+let g:Lf_HideHelp = 1
+let g:Lf_UseCache = 0
+let g:Lf_UseVersionControlTool = 0
+let g:Lf_IgnoreCurrentBufferName = 1
+" popup mode
+let g:Lf_PreviewInPopup = 1
+let g:Lf_WindowPosition = 'popup'
+let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2", 'font': "Hack NF" }
+let g:Lf_PreviewResult = {
+            \ 'File': 0,
+            \ 'Buffer': 0,
+            \ 'Mru': 0,
+            \ 'Tag': 0,
+            \ 'BufTag': 1,
+            \ 'Function': 1,
+            \ 'Line': 0,
+            \ 'Colorscheme': 0,
+            \ 'Rg': 0,
+            \ 'Gtags': 1
+            \}
+
+" 修改默认搜索文件按键
+let g:Lf_ShortcutB = "<leader>fb"
+let g:Lf_ShortcutF = "<leader>ff"
+
+let g:Lf_GtagsAutoGenerate = 1
+let g:Lf_Gtagslabel = 'native-pygments'
+" -----------------------------------------------------------------------------"}}}
+""  < YouCompleteMe 插件配置 >"{{{
+" -----------------------------------------------------------------------------
+" " set completeopt=longest,menu
+" let g:ycm_global_ycm_extra_conf = '~/.vim/default_ycm_extra_conf.py'
+" " let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+" " 不显示开启vim时检查ycm_extra_conf文件的信息
+" " let g:ycm_confirm_extra_conf=0
+" " use experimental clangd-based completer
+" " let g:ycm_clangd_binary_path = '/usr/lib/llvm/9/bin/clangd'
+"
+" let g:ycm_language_server =
+"   \ [{
+"   \   'name': 'ccls',
+"   \   'cmdline': [ 'ccls' ],
+"   \   'filetypes': [ 'c', 'cpp', 'cuda', 'objc', 'objcpp' ],
+"   \   'project_root_files': [ '.ccls-root', 'compile_commands.json' ]
+"   \ }]
+" "
+" " 让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
+" " set completeopt=longest,menu
+" " 设置在下面几种格式的文件上屏蔽ycm
+" let g:ycm_filetype_blacklist = {
+"             \ 'nerdtree' : 1,
+"             \ 'tagbar' : 1,
+"             \ 'qf' : 1,
+"             \ 'notes' : 1,
+"             \ 'markdown' : 1,
+"             \ 'unite' : 1,
+"             \ 'text' : 1,
+"             \ 'vimwiki' : 1,
+"             \ 'pandoc' : 1,
+"             \ 'infolog' : 1,
+"             \ 'mail' : 1,
+"             \ 'messages' : 1
+"             \}
+"
+" " " 输入第2个字符开始补全
+" " let g:ycm_min_num_of_chars_for_completion=2
+" " " 禁止缓存匹配项,每次都重新生成匹配项
+" " " let g:ycm_cache_omnifunc=0
+" " " 开启语义补全
+" " let g:ycm_seed_identifiers_with_syntax=1
+" " 在注释输入中也能补全
+" let g:ycm_complete_in_comments = 1
+" " 在字符串输入中也能补全
+" let g:ycm_complete_in_strings = 1
+" " 注释和字符串中的文字也会被收入补全
+" let g:ycm_collect_identifiers_from_comments_and_strings = 1
+" " 关闭语法检查显示
+" " let g:ycm_show_diagnostics_ui = 0
+"
+" " 自动开启、关闭函数原型预览
+" let g:ycm_add_preview_to_completeopt = 0
+" let g:ycm_autoclose_preview_window_after_completion = 1
+" let g:ycm_autoclose_preview_window_after_insertion = 1
+" " 有新的诊断数据时自动添加到location list中
+" let g:ycm_always_populate_location_list = 1
+"
+" " 修改对函数的补全快捷键，默认是CTRL + space
+" let g:ycm_key_invoke_completion = '<C-l>'
+" " youcompleteme  默认tab  s-tab 和 ultisnips 冲突
+" " let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
+" " let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
+"
+" let g:ycm_error_symbol = g:ale_sign_error
+" let g:ycm_warning_symbol = g:ale_sign_error
+"
+" nnoremap <F12> :YcmForceCompileAndDiagnostics<CR>
+"
+" " NEED_TO_FIX: conflict with vim-fugitgive
+" nnoremap <leader>g :YcmCompleter GoTo<CR>
+" nnoremap <leader>gi :YcmCompleter GoToInclude<CR>
+" nnoremap <leader>gc :YcmCompleter GoToDeclaration<CR>
+" nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
+" nnoremap <leader>gr :YcmCompleter GoToReferences<CR>
+" nnoremap <leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+"
+" nnoremap <leader>gt :YcmCompleter GetType<CR>
+" nnoremap <leader>gdc :YcmCompleter GetDoc<CR>
+" nnoremap <leader>gp :YcmCompleter GetParent<CR>
+"
+" " NEED_TO_FIX: conflict with UltiSnips
+" " 输入2个字符即弹出语义补全
+" " let g:ycm_semantic_triggers =  {
+" 			" \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
+" 			" \ 'cs,lua,javascript': ['re!\w{2}'],
+" 			" \ }
+"
+" " Function to slove conlict with ultisnips
+" function! g:UltiSnips_Complete()
+"   call UltiSnips#ExpandSnippet()
+"   if g:ulti_expand_res == 0
+"     if pumvisible()
+"       return "\<C-n>"
+"     else
+"       call UltiSnips#JumpForwards()
+"       if g:ulti_jump_forwards_res == 0
+"         return "\<TAB>"
+"       endif
+"     endif
+"   endif
+"   return ''
+" endfunction
+"
+" function! g:UltiSnips_Reverse()
+"   call UltiSnips#JumpBackwards()
+"   if g:ulti_jump_backwards_res == 0
+"     return "\<C-P>"
+"   endif
+"
+"   return ''
+" endfunction
+"
+" if !exists('g:UltiSnipsJumpForwardTrigger')
+"   let g:UltiSnipsJumpForwardTrigger = '<tab>'
+" endif
+"
+" if !exists('g:UltiSnipsJumpBackwardTrigger')
+"   let g:UltiSnipsJumpBackwardTrigger='<c-tab>'
+" endif
+"
+" augrou ycm_snip
+"     autocmd!
+"     autocmd InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger     . " <C-R>=g:UltiSnips_Complete()<cr>"
+"     autocmd InsertEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
+" augrou END
+"" -----------------------------------------------------------------------------"}}}
+"  < vista 插件配置 >"{{{
+" -----------------------------------------------------------------------------
+" How each level is indented and what to prepend.
+" This could make the display more compact or more spacious.
+" e.g., more compact: ["▸ ", ""]
+" Note: this option only works the LSP executives, doesn't work for `:Vista ctags`.
+let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+
+" Executive used when opening vista sidebar without specifying it.
+" See all the avaliable executives via `:echo g:vista#executives`.
+let g:vista_default_executive = 'ctags'
+
+" Set the executive for some filetypes explicitly. Use the explicit executive
+" instead of the default one for these filetypes when using `:Vista` without
+" specifying the executive.
+let g:vista_executive_for = {
+  \ 'cpp': 'coc',
+  \ 'python': 'coc',
+  \ 'bash': 'coc',
+  \ 'vimwiki': 'markdown',
+  \ 'pandoc': 'markdown',
+  \ 'markdown': 'coc',
+  \ }
+
+" Declare the command including the executable and options used to generate ctags output
+" for some certain filetypes.The file path will be appened to your custom command.
+" For example:
+let g:vista_ctags_cmd = {
+      \ 'haskell': 'hasktags -x -o - -c',
+      \ }
+
+" To enable fzf's preview window set g:vista_fzf_preview.
+" The elements of g:vista_fzf_preview will be passed as arguments to fzf#vim#with_preview()
+" For example:
+let g:vista_fzf_preview = ['right:50%']
+
+" Ensure you have installed some decent font to show these pretty symbols, then you can enable icon for the kind.
+let g:vista#renderer#enable_icon = 1
+
+" The default icons can't be suitable for all the filetypes, you can extend it as you wish.
+" let g:vista#renderer#icons = {
+" \   "function": "\uf794",
+" \   "variable": "\uf71b",
+" \  }
+" -----------------------------------------------------------------------------"}}}
+"  < vim-sidebar-manager 插件配置 >"{{{
+" -----------------------------------------------------------------------------
+" NERDTree
+"let loaded_nerd_tree=1    " 禁用所有与NERD_tree有关的命令
+"let g:NERDTreeIgnore=['/.vim$','/~$']    " 不显示指定的类型的文件
+"let g:NERDTreeShowHidden=0    " 不显示隐藏文件(好像只在linux环境中有效)
+"let g:NERDTreeSortOrder=['//$','/.cpp$','/.c$','/.h$', '*']    " 排序
+let g:NERDTreeCaseSensitiveSort=0     " 不分大小写排序
+let g:NERDTreeWinSize=30
+"let NERDTreeShowLineNumbers=1
+let g:NERDTreeShowBookmarks=1
+"let g:NERDTreeQuitOnOpen=1    " 打开文件后, 关闭NERDTrre窗口
+"let g:NERDTreeHighlightCursorline=1     " 高亮NERDTrre窗口的当前行
+"nmap <silent> <leader>tmk :Bookmark expand(/"<cword>/")<cr>
+
+" Tagbar
+let g:tagbar_left=0
+let g:tagbar_width=30
+let g:tagbar_autofocus = 1
+let g:tagbar_sort = 0
+let g:tagbar_compact = 1
+let g:tagbar_foldlevel = 1
+
+" undotree
+let g:undotree_SetFocusWhenToggle = 1
+
+" vim-sidebar-manager
+let g:sidebars = {
+  \ 'nerdtree': {
+  \     'position': 'left',
+  \     'check_win': {nr -> getwinvar(nr, '&filetype') ==# 'nerdtree'},
+  \     'open': 'NERDTree',
+  \     'close': 'NERDTreeClose'
+  \ },
+  \ 'coc-explorer': {
+  \     'position': 'left',
+  \     'check_win': {nr -> getwinvar(nr, '&filetype') ==# 'coc-explorer'},
+  \     'open': ':CocCommand explorer --no-toggle',
+  \     'close': ':CocCommand explorer --toggle'
+  \ },
+  \ 'tagbar': {
+  \     'position': 'right',
+  \     'check_win': {nr -> bufname(winbufnr(nr)) =~ '__Tagbar__'},
+  \     'open': 'TagbarOpen',
+  \     'close': 'TagbarClose'
+  \ },
+  \ 'vista': {
+  \     'position': 'right',
+  \     'check_win': {nr -> bufname(winbufnr(nr)) =~ '__vista__'},
+  \     'open': 'Vista',
+  \     'close': 'Vista!'
+  \ },
+  \ 'undotree': {
+  \     'position': 'left',
+  \     'check_win': {nr -> getwinvar(nr, '&filetype') ==# 'undotree'},
+  \     'open': 'UndotreeShow',
+  \     'close': 'UndotreeHide'
+  \ },
+  \ 'quickfix': {
+  \     'position': 'bottom',
+  \     'check_win': {nr -> getwinvar(nr, '&filetype') ==# 'qf' && !getwininfo(win_getid(nr))[0]['loclist']},
+  \     'open': 'copen',
+  \     'close': 'botright cclose'
+  \ },
+  \ 'loclist': {
+  \     'position': 'bottom',
+  \     'check_win': {nr -> getwinvar(nr, '&filetype') ==# 'qf' && getwininfo(win_getid(nr))[0]['loclist']},
+  \     'open': 'silent! lopen',
+  \     'close': 'silent! lclose'
+  \ },
+  \ 'terminal': {
+  \     'position': 'bottom',
+  \     'get_win': {-> exists('t:__terminal_bid__') ? bufwinnr(t:__terminal_bid__) : 0},
+  \     'open': 'call TerminalOpen()',
+  \     'close': 'call TerminalClose()'
+  \ }
+  \ }
+noremap <silent> <F1> :call sidebar#toggle('loclist')<CR>
+noremap <silent> <F2> :call sidebar#toggle('quickfix')<CR>
+noremap <silent> <S-F3> :call sidebar#toggle('nerdtree')<CR>
+noremap <silent> <F3> :call sidebar#toggle('coc-explorer')<CR>
+noremap <silent> <S-F4> :call sidebar#toggle('tagbar')<CR>
+noremap <silent> <F4> :call sidebar#toggle('vista')<CR>
+noremap <silent> <F5> :call sidebar#toggle('undotree')<CR>
+noremap <silent> <F12> :call sidebar#toggle('terminal')<CR>
+" -----------------------------------------------------------------------------"}}}
+"  < vim-airline 插件配置 >"{{{
+" -----------------------------------------------------------------------------
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+
+" whitespace
+let g:airline_detect_whitespace=0
+let g:airline#extensions#whitespace#enable = 0
+let g:airline#extensions#whitespace#checks = [ ]
+" let g:airline#extensions#whitespace#show_message = 1
+" let g:airline#extensions#whitespace#symbol = '!'
+
+" enalbe aireline buffer index and select
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+nmap <leader>1 <Plug>AirlineSelectTab1
+nmap <leader>2 <Plug>AirlineSelectTab2
+nmap <leader>3 <Plug>AirlineSelectTab3
+nmap <leader>4 <Plug>AirlineSelectTab4
+nmap <leader>5 <Plug>AirlineSelectTab5
+nmap <leader>6 <Plug>AirlineSelectTab6
+nmap <leader>7 <Plug>AirlineSelectTab7
+nmap <leader>8 <Plug>AirlineSelectTab8
+nmap <leader>9 <Plug>AirlineSelectTab9
+nmap <leader>- <Plug>AirlineSelectPrevTab
+nmap <leader>= <Plug>AirlineSelectNextTab
+
+" too slow
+" switching to buffer 1 - 9 is mapped to ,[nOfBuffer]
+" for buffer_no in range(1, 9)
+  " execute "nmap <Leader>" . buffer_no . " <Plug>AirlineSelectTab" . buffer_no . "\<CR>"
+" endfor
+
+" switching to buffer 10 - 100 is mapped to ,0[nOfBuffer]
+" for buffer_no in range(10, 100)
+  " execute "nmap <Leader>" . buffer_no . " <Plug>AirlineSelectTab" . buffer_no . "\<CR>"
+" endfor
+
+" close buffer
+nmap <leader>0 :bdelete<CR>
+" -----------------------------------------------------------------------------"}}}
+" < vim-markdown 配置 >"{{{
+" -----------------------------------------------------------------------------
+let g:vim_markdown_folding_disabled = 1
+" disable conceal
+let g:vim_markdown_conceal = 2
+" NOTE: not work with vimwiki
+let g:vim_markdown_fenced_languages = ['c++=cpp', 'viml=vim', 'bash=sh', 'python=python', 'xmodmap=xmodmap']
+" -----------------------------------------------------------------------------"}}}
+" < vim-startify 配置 >"{{{
+" -----------------------------------------------------------------------------
+let g:startify_change_to_vcs_root = 1
+let g:startify_bookmarks = [
+            \ {'v': '~/.vim/vimrc'},
+            \ {'z': '~/.zshrc'},
+            \ {'i': '~/.config/i3/config'},
+            \ {'t': '~/.tmux.conf'},
+            \ {'p': '/etc/portage/make.conf'},
+            \ {'m': '/etc/portage/package.mask'},
+            \ {'u': '/etc/portage/package.use/default'},
+            \ ]
+
+let g:startify_lists = [
+            \ { 'type': 'files',     'header': ['   MRU']            },
+            \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+            \ { 'type': 'sessions',  'header': ['   Sessions']       },
+            \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+            \ { 'type': 'commands',  'header': ['   Commands']       },
+            \ ]
+" -----------------------------------------------------------------------------"}}}
+"  < vimwiki 插件配置 >"{{{
+" -----------------------------------------------------------------------------
+" <C-T> 增加List项目等级
+" <C-D> 降低List项目等级
+" ":VimwikiSearchTags 在wiki查找给定标签的所有位置
+
+let g:vimwiki_list = [{
+            \ 'path_html':'~/vimwiki/html',
+            \ 'template_path':'~/vimwiki/templates',
+            \ 'template_default': 'default',
+            \ 'template_ext': '.tpl',
+            \ 'syntax': 'markdown',
+            \ 'ext': '.md',
+            \ 'custom_wiki2html': 'vimwiki_markdown',
+            \ 'list_margin': 0,
+            \ 'auto_tags': 1,
+            \ 'auto_export': 0
+            \ }]
+
+let g:custom_wiki2html_args = 'null'
+let g:vimwiki_global_ext = 0
+let g:vimwiki_hl_cb_checked = 1
+let g:vimwiki_browsers = ['chromium']
+let g:vimwiki_CJK_length = 1
+let g:vimwiki_dir_link = 'index'
+" let g:vimwiki_html_header_numbering = 1
+let g:vimwiki_conceallevel = 2
+" let g:vimwiki_valid_html_tags='b,i,s,u,sub,sup,kbd,del,br,hr,div,code,h1'
+let g:vimwiki_valid_html_tags = 'div, span, table, td, pre, tr'
+let g:vimwiki_folding = 'list'
+
+" let vimwiki use vim makrdown plugin syntax instead of it's own buidin syntax
+" autocmd FileType vimwiki set syntax=markdown
+" -----------------------------------------------------------------------------"}}}
+"  < vim-which-key 插件配置 >"{{{
+" -----------------------------------------------------------------------------
+" for lasy load
+" augroup vim_which_key
+    " autocmd!
+    " autocmd User vim-which-key call which_key#register('<Space>', 'g:which_key_space_map')
+    " autocmd User vim-which-key call which_key#register(',', 'g:which_key_comma_map')
+" augroup END
+
+call which_key#register('<Space>', 'g:which_key_space_map')
+call which_key#register(',', 'g:which_key_comma_map')
+
+" Define prefix dictionary
+let g:which_key_space_map =  {}
+let g:which_key_space_map['name'] =  'leader'
+
+let g:which_key_comma_map =  {}
+let g:which_key_comma_map['name'] =  'localleader'
+
+" Space
+for s:i in range(0, 9)
+  let g:which_key_space_map[s:i] = 'which_key_ignore'
+endfor
+unlet s:i
+
+let g:which_key_space_map['-'] = 'which_key_ignore'
+let g:which_key_space_map['='] = 'which_key_ignore'
+let g:which_key_space_map['<Tab>'] =  'No highlight for search'
+let g:which_key_space_map['T'] =  ['<Plug>(coc-translator-p)', 'Translation']
+let g:which_key_space_map['E'] =  [':edit $MYVIMRC', 'Edit vimrc']
+let g:which_key_space_map['R'] =  [':source $MYVIMRC', 'Reload vimrc']
+let g:which_key_space_map['/'] =  ['<Plug>(easymotion-sn)', 'Enhance search']
+let g:which_key_space_map[' '] =  ['<plug>NERDCommenterToggle', 'Toggle the comment']
+
+let g:which_key_space_map.f =  {
+            \ 'name' : '+LeaderF',
+            \ 'f'    : ['LeaderfFile', 'File'],
+            \ 'b'    : ['LeaderfBuffer', 'Buffer'],
+            \ 'm'    : ['LeaderfMru', 'Mru'],
+            \ 't'    : ['LeaderfBufTag', 'BufTag'],
+            \ 'l'    : ['LeaderfLine', 'Line'],
+            \ 'u'    : ['LeaderfFunction', 'Function'],
+            \ 'c'    : ['LeaderfHistoryCmd', 'Cmd'],
+            \ 's'    : ['LeaderfSelf', 'LeaderfSelf'],
+            \ 'r'    : ['LeaderfRgRecall', 'Recall last search of rg'],
+            \ 'w'    : ['<Plug>LeaderfRgBangCwordLiteralNoBoundary', 'Search word under cursor literally'],
+            \ 'v'    : ['<Plug>LeaderfRgBangVisualLiteralNoBoundary', 'Search visually selected text literally'],
+            \ 'g'    : {
+                \ 'name' : '+gtags',
+                \ 'd'    : ['<Plug>LeaderfGtagsDefinition', 'Show locations of definitions'],
+                \ 'r'    : ['<Plug>LeaderfGtagsReference', 'Show reference to a defined symbol'],
+                \ 's'    : ['<Plug>LeaderfGtagsSymbol', 'Show reference to a not defined symbol'],
+                \ 'g'    : ['<Plug>LeaderfGtagsGrep', 'Show all matched lines'],
+                \ 'o'    : [':Leaderf! gtags --recall', 'Recall last search'],
+                \ 'n'    : [':Leaderf gtags --next', 'Jump to next result'],
+                \ 'p'    : [':Leaderf gtags --previous', 'Jump to previous result'],
+                \ },
+            \ }
+
+let g:which_key_space_map.F = {
+            \ 'name' : '+CtrlSF ' ,
+            \ 'f' : ['<Plug>CtrlSFPrompt' , 'CtrlSFPrompt'],
+            \ 'n' : ['<Plug>CtrlSFCwordPath' , 'Input <cword> with CtrlSF and waiting'],
+            \ 'e' : ['<Plug>CtrlSFCwordExec' , 'Input <cword> with CtrlSF'],
+            \ 'p' : ['<Plug>CtrlSFPwordExec' , 'Input last search pattern with CtrlSF'],
+            \ 'o' : [':CtrlSFOpen' , 'CtrlSFOpen'],
+            \ 't' : [':CtrlSFToggle', 'CtrlSFToggle'],
+            \ }
+
+let g:which_key_space_map.g =  {
+            \ 'name' : '+git',
+            \ 'v'    :  [':GV', 'open commit browser'],
+            \ '!'    :  [':GV!', 'list commits affected current file'],
+            \ '?'    :  [':GV?', 'revisions of the current file'],
+            \ 'l'    :  [':CocCommand git.copyUrl', 'Copy url of current line to clipboard'],
+            \ 'i'    :  ['<Plug>(coc-git-chunkinfo)', 'Show chunk info under cursor'],
+            \ 'n'    :  ['<Plug>(coc-git-nextchunk)', 'Jump to next chunk'],
+            \ 'p'    :  ['<Plug>(coc-git-prevchunk)', 'Jump to previous chunk'],
+            \ 'u'    :  [':CocCommand git.chunkUndo', 'Undo current chunk'],
+            \ 's'    :  [':CocCommand git.chunkStage', 'Stage current chunk'],
+            \ 'd'    :  [':CocCommand git.diffCached', 'Show cached diff in preview window'],
+            \ 'c'    :  [':CocCommand git.showCommit', 'Show commit of current chunk'],
+            \ 'b'    :  [':CocCommand git.browserOpen', 'Open current line in browser'],
+            \ 'f'    :  [':CocCommand git.foldUnchanged', 'Fold unchanged lines of current buffer'],
+            \ 't'    :  [':CocCommand git.toggleGutters', 'Toggle git gutters in sign column'],
+            \ }
+
+let g:which_key_space_map.t =  {
+            \ 'name' : '+Guntentags',
+            \ 's'    :  ['<Plug>GscopeFindSymbol', 'Find this symbol'],
+            \ 'g'    :  ['<Plug>GscopeFindDefinition', 'Find this definition'],
+            \ 'd'    :  ['<Plug>GscopeFindCalledFunc', 'Find functions called by this function'],
+            \ 'c'    :  ['<Plug>GscopeFindCallingFunc', 'Find functions calling this function'],
+            \ 't'    :  ['<Plug>GscopeFindText', 'Find this text string'],
+            \ 'e'    :  ['<Plug>GscopeFindEgrep', 'Find this egrep pattern'],
+            \ 'f'    :  ['<Plug>GscopeFindFile', 'Find this file'],
+            \ 'i'    :  ['<Plug>GscopeFindInclude', 'Find files #including this file'],
+            \ 'a'    :  ['<Plug>GscopeFindAssign', 'Find places where this symbol is assigned a value'],
+            \ 'z'    :  ['<Plug>GscopeFindCtag', 'Find <cword> in ctags'],
+            \ 'k'    :  ['GscopeKill', 'Close all cscope connections'],
+            \ }
+
+let g:which_key_space_map.w =  {
+            \ 'name' : '+vimwiki',
+            \ 'w'    :  ['<Plug>VimwikiIndex', 'VimwikiIndex'],
+            \ 'T'    :  ['<Plug>VimwikiTabIndex', 'VimwikiIndex[new tab]'],
+            \ 'i'    :  ['<Plug>VimwikiDiaryIndex', 'VimwikiDiaryIndex'],
+            \ 'd'    :  ['<Plug>VimwikiDeleteLink', 'Delete current wiki page'],
+            \ 'r'    :  ['<Plug>VimwikiRenameLink', 'Rename current wiki page'],
+            \ 's'    :  ['<Plug>VimwikiUISelect', 'List and select available wikis'],
+            \ 't'    :  ['VimwikiTable', 'Create a table with 5C&2R'],
+            \ 'c'   :  {
+                \ 'name' : '+contents',
+                \ 'o'    : ['VimwikiTOC', 'VimwikiTOC'],
+                \ },
+            \ 'h'   :  {
+                \ 'name' : '+html',
+                \ 'a'    : ['<Plug>VimwikiAll2HTML', 'VimwikiAll2HTML'],
+                \ 'c'    : ['<Plug>Vimwiki2HTML', 'Vimwiki2HTML'],
+                \ 'b'    : ['<Plug>Vimwiki2HTMLBrowse', 'Vimwiki2HTMLBrowse'],
+                \ },
+            \ ' '    : {
+                \ 'name' : '+DiaryNote',
+                \ 'w'    :  ['<Plug>VimwikiMakeDiaryNote', 'VimwikiMakeDiaryNote'],
+                \ 't'    :  ['<Plug>VimwikiTabMakeDiaryNote', 'VimwikiMakeDiaryNote[new tab]'],
+                \ 'y'    :  ['<Plug>VimwikiMakeYesterdayDiaryNote', 'VimwikiMakeYesterdayDiaryNote'],
+                \ 'm'    :  ['<Plug>VimwikiMakeTomorrowDiaryNote', 'VimwikiMakeTomorrowDiaryNote'],
+                \ 'i'    :  ['<Plug>VimwikiDiaryGenerateLinks', 'VimwikiDiaryGenerateLinks'],
+              \ }
+            \ }
+
+" TODO: Add grep/search <cword> mappings
+let g:which_key_space_map.c =  {
+            \ 'name' : '+CoC',
+            \ 'e'    :  [':CocList extensions', 'CocList extensions'],
+            \ 'o'    :  [':CocList outline', 'CocList outline'],
+            \ 's'    :  [':CocList -I symbols', 'CocList -I symbols'],
+            \ 'M'    :  [':CocList marketplace', 'CocList marketplace'],
+            \ 'c'    :  [':CocList commands', 'CocList commands'],
+            \ 'b'    :  [':CocList buffers', 'Buffers'],
+            \ 'h'    :  [':CocList cmdhistory', 'Cmd history'],
+            \ 'f'    :  [':CocList files', 'Search files from current cwd'],
+            \ 't'    :  [':CocList filetypes', 'File types'],
+            \ 'g'    :  [':CocList grep', 'Grep text from current cwd'],
+            \ 'H'    :  [':CocList helptags', 'Helptags of vim'],
+            \ 'l'    :  [':CocList lines', 'Search lines by regex'],
+            \ 'm'    :  [':CocList mru', 'Most recent used files'],
+            \ 'v'    :  [':CocList vimcommands', 'Available vim commands'],
+            \ 'w'    :  [':CocList words', 'Search word in current buffer'],
+            \ 'y'    :  [':CocList -A --normal yank', 'Yank history'],
+            \ 'G'    :  [':CocList --normal gstatus', 'Gstatus'],
+            \ 'S'    :  [':CocList snippets', 'Snippets'],
+            \ 'r'    :  [':CocListResume', 'CocListResume'],
+            \ 'j'    :  [':CocNext', 'CocNext'],
+            \ 'k'    :  [':CocPrev', 'CocPrev'],
+            \ 'd'    :  {
+                \ 'name' : '+diagnostic',
+                \ 'd'    :  [':CocList diagnostics', 'CocList diagnostics'],
+                \ 'p'    :  ['<Plug>(coc-diagnostic-prev)', 'Next-diagnostic'],
+                \ 'n'    :  ['<Plug>(coc-diagnostic-next)', 'Previous-diagnostic'],
+              \ },
+            \ }
+
+let g:which_key_space_map.l =  {
+            \ 'name' : '+lsp',
+            \ 'n'    :  ['<Plug>(coc-rename)', 'Rename current word'],
+            \ 'F'    :  ['<Plug>(coc-format-selected)', 'Format selected region'],
+            \ 'a'    :  ['<Plug>(coc-codeaction-selected)', 'Do codeaction in selected region'],
+            \ 'A'    :  ['<Plug>(coc-codeaction)', 'Do codeaction in current buffer'],
+            \ 'f'    :  ['<Plug>(coc-fix-current)', 'Autofix problem of current line'],
+            \ 'R'    :  ['<Plug>(coc-refactor)', 'CocRefactor'],
+            \ 'd'    :  ['<Plug>(coc-definition)', 'Definition'],
+            \ 't'    :  ['<Plug>(coc-type-definition)', 'Type definition'],
+            \ 'i'    :  ['<Plug>(coc-implementation)', 'Implementation'],
+            \ 'r'    :  ['<Plug>(coc-references)', 'References'],
+            \ 'c'    :  ['<Plug>(coc-declaration)', 'Declaration'],
+            \ 's'    :  ['<Plug>(coc-range-select)', 'Range select'],
+            \ 'S'    :  ['<Plug>(coc-range-select-backword)', 'Range select backword'],
+            \ 'h'    :  [':call CocAction("doHover")', 'Hover'],
+            \ }
+
+let g:which_key_space_map[','] = {
+            \ 'name' : '+Easymotion ' ,
+            \ 'f' : ['<Plug>(easymotion-f)' , 'find {char} to the right'],
+            \ 'F' : ['<Plug>(easymotion-F)' , 'find {char} to the left'],
+            \ 't' : ['<Plug>(easymotion-t)' , 'till before the {char} to the right'],
+            \ 'T' : ['<Plug>(easymotion-T)' , 'till after the {char} to the left'],
+            \ 'w' : ['<Plug>(easymotion-w)' , 'beginning of word forward'],
+            \ 'W' : ['<Plug>(easymotion-W)' , 'beginning of WORD forward'],
+            \ 'b' : ['<Plug>(easymotion-b)' , 'beginning of word backward'],
+            \ 'B' : ['<Plug>(easymotion-B)' , 'beginning of WORD backward'],
+            \ 'e' : ['<Plug>(easymotion-e)' , 'end of word forward'],
+            \ 'E' : ['<Plug>(easymotion-E)' , 'end of WORD forward'],
+            \ 'L' : ['<Plug>(easymotion-overwin-line)', 'Move to line'],
+            \ '/' : ['<Plug>(easymotion-sn)', 'enhance default search'],
+            \ 'g' : {
+                \ 'name' : '+Backwards ' ,
+                \ 'e' : ['<Plug>(easymotion-ge)' , 'end of word backward'],
+                \ 'E' : ['<Plug>(easymotion-gE)' , 'end of WORD backward'],
+                \ },
+            \ 'l' : ['<Plug>(easymotion-lineforward)' , 'easymotion-lineforward'],
+            \ 'j' : ['<Plug>(easymotion-j)' , 'easymotion-j'],
+            \ 'k' : ['<Plug>(easymotion-k)' , 'easymotion-k'],
+            \ 'h' : ['<Plug>(easymotion-linebackward)' , 'easymotion-linebackward'],
+            \ 'n' : ['<Plug>(easymotion-n)' , 'jump to latest "/" or "?" forward'],
+            \ 'N' : ['<Plug>(easymotion-N)' , 'jump to latest "/" or "?" backward.'],
+            \ 's' : ['<Plug>(easymotion-s)' , 'find(search) {char} forward and backward.'],
+            \ }
+
+let g:which_key_space_map.a =  {
+            \ 'name' : '+EasyAlign',
+            \ 'i'    :  ['<Plug>(EasyAlign)', 'Interactive mode'],
+            \ 'l'    :  ['<Plug>(LiveEasyAlign)', 'Live-interactive mode'],
+            \ }
+
+let g:which_key_space_map.p =  {
+            \ 'name' : '+vim-plug',
+            \ 'i'    :  ['PlugInstall', 'Install plugins'],
+            \ 'u'    :  ['PlugUpdate', 'Update plugins'],
+            \ 'c'    :  ['PlugClean', 'Remove unlisted plugins'],
+            \ 'U'    :  ['PlugUpgrade', 'Upgrade vim-plug itself'],
+            \ 's'    :  ['PlugStatus', 'Check the status of plugins'],
+            \ 'd'    :  ['PlugDiff', 'Examine changes from the previous update'],
+            \ 'n'    :  ['PlugSnapshot', 'Generate script for restoring the current snapshot of the plugins'],
+            \ }
+
+let g:which_key_space_map.n =  {
+            \ 'name' : '+NERDCommenter',
+            \ 'c'    :  ['<plug>NERDCommenterComment', 'Comment out current line or text selected'],
+            \ ' '    :  ['<plug>NERDCommenterToggle', 'Toggles the comment state of the selected line'],
+            \ 'm'    :  ['<plug>NERDCommenterMinimal', 'Comments lines using only one set of multipart delimiters'],
+            \ 'n'    :  ['<plug>NERDCommenterNested', 'Same as |Comment| but forces nesting'],
+            \ '$'    :  ['<plug>NERDCommenterToEOL', 'Comments current line from cursor to end of line'],
+            \ 'i'    :  ['<plug>NERDCommenterInvert', 'Toggles comment state of selected lines individually'],
+            \ 's'    :  ['<plug>NERDCommenterSexy', 'Comments out selected lines with pretty block formatted layout'],
+            \ 'y'    :  ['<plug>NERDCommenterYank', 'Same as |Comment| except that commented lines are yanked first'],
+            \ 'A'    :  ['<plug>NERDCommenterAppend', 'Adds comment delimiters to EOL and goes into insert mode between them'],
+            \ 'l'    :  ['<plug>NERDCommenterAlignLeft', 'Same as |Comment| except that delimiters are aligned down left side'],
+            \ 'b'    :  ['<plug>NERDCommenterAlignBoth', 'Same as |Comment| except that delimiters are aligned down both side'],
+            \ 'u'    :  ['<plug>NERDCommenterUncomment', 'Uncomments selected lines'],
+            \ 'a'    :  ['<plug>NERDCommenterAltDelims', 'Switches to alternative set of delimiters'],
+            \ }
+
+let g:which_key_space_map.W =  {
+            \ 'name' : '+Windows',
+            \ '-'    :  ['<C-w>5-', 'Decrease the height of the current window '],
+            \ '+'    :  ['<C-w>5+', 'Increase the height of the current window '],
+            \ '<'    :  ['<C-w>5<', 'Decrease the width of the current window '],
+            \ '>'    :  ['<C-w>5>', 'Increase the width of the current window '],
+            \ '='    :  ['<C-w>=', 'Resize all windows to equal dimensions based on their splits'],
+            \ }
+
+let g:which_key_space_map.m =  {
+            \ 'name' : '+Misc',
+            \ 'n'    :  ['<Plug>NrrwrgnDo', 'Open in new narrowed window'],
+            \ 'c'    :  ['<Plug>Colorizer', 'Toggle colorizer'],
+            \ 'f'    :  ['FixWhitespace', 'FixWhitespace'],
+            \ 'F'    :  ['Neoformat', 'Neoformat'],
+            \ 'r'    :  ['RangerCurrentDirectory', 'Open ranger in current dir'],
+            \ }
+
+let g:which_key_space_map.o =  {
+            \ 'name' : '+Open-browser',
+            \ 's'    :  ['<Plug>(openbrowser-smart-search)', 'smart search'],
+            \ 'o'    :  ['<Plug>(openbrowser-open)', 'open url/filepath'],
+            \ }
+
+let g:which_key_exit = ["\<C-c>", "\<Esc>"]
+
+nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
+vnoremap <silent> <localleader> :<c-u>WhichKeyVisual  ','<CR>
+nnoremap <silent> <leader> :<c-u>WhichKey '<Space>'<CR>
+vnoremap <silent> <leader> :<c-u>WhichKeyVisual '<Space>'<CR>
+" -----------------------------------------------------------------------------"}}}
+"  < indentLine 插件配置 >"{{{
+" -----------------------------------------------------------------------------
+" 用于显示对齐线，与 indent_guides 在显示方式上不同，根据自己喜好选择了
+" 在终端上会有屏幕刷新的问题，这个问题能解决有更好了
+" 开启/关闭对齐线
+" nmap <leader>il :IndentLinesToggle<CR>
+
+let g:indentLine_char = '│'
+" reject indentLine overwrite my conceal setting
+let g:indentLine_setConceal = 0
+" let g:indentLine_conceallevel = 2
+" let g:indentLine_concealcursor = "c"
+
+" 设置终端对齐线颜色
+" let g:indentLine_color_term = 239
+" 设置 GUI 对齐线颜色
+" let g:indentLine_color_gui = '#A4E57E'
+" -----------------------------------------------------------------------------"}}}
+"  < Misc >"{{{
+" -----------------------------------------------------------------------------
+" asyncrun 插件配置
+let g:asyncrun_bell = 1
+" let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
+" auto open quickfix when text add to it
+" autocmd QuickFixCmdPost * botright copen 8
+
+" echodoc 插件配置
+let g:echodoc#enable_at_startup = 1
+
+" easymotion 插件配置
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
+
+" vim-multiple-cursor 插件配置
+" let g:multi_cursor_quit_key='<C-c>'
+let g:multi_cursor_exit_from_insert_mode=0
+
+" vim-pandoc 配置
+let g:pandoc#filetypes#handled=['rst', 'textile']
+let g:pandoc#filetypes#pandoc_markdown=0
+
+" vim-devicons
+if exists("g:loaded_webdevicons")
+  call webdevicons#refresh()
+endif
+let g:webdevicons_conceal_nerdtree_brackets = 0
+
+" vim-cppman
+let g:cppman_open_mode = "<auto>"
+
+" NrrwRgn
+let g:nrrw_rgn_nomap_nr = 1
+let g:nrrw_rgn_nomap_Nr = 1
+
+" auto-pairs
+let g:AutoPairsUser = {'<':'>'}
+let g:AutoPairsFlyMode = 1
+let g:AutoPairsShortcutBackInsert = '<M-b>'
+let g:AutoPairsShortcutFastWrap = '<M-e>'
+
+" ranger.vim
+let g:ranger_map_keys = 0
+" -----------------------------------------------------------------------------"}}}

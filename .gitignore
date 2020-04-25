@@ -1,0 +1,17 @@
+# dir
+.ssh
+.gnupg
+.task
+vimwiki
+
+# perms
+perms.conf
+home/petrus/.gitconfig
+
+# file
+*.swp
+home/petrus/.weechat/sec.conf
+home/petrus/Scripts/pt_attendance.sh
+home/petrus/.config/i3/config.jt
+etc/ssh/sshd_config
+etc/msmtprc
