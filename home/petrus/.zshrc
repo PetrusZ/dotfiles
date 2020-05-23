@@ -58,8 +58,9 @@ if [[ $UID != 0 ]]; then
     PATH_NODE_LOCAL="/home/petrus/.local/node_modules/.bin"
     PATH_GO_LOCAL="/home/petrus/.local/go/bin"
 fi
-PATH_DISTCC="/usr/lib/distcc/bin:"
-export PATH="/usr/sbin:/usr/local/sbin:/sbin:${PATH_LOCAL}:${PATH_NODE_LOCAL}:${PATH_GO_LOCAL}:${PATH}"
+PATH_DISTCC="/usr/lib/distcc/bin"
+PATH_DOOM="/home/petrus/.emacs.d/bin"
+export PATH="/usr/sbin:/usr/local/sbin:/sbin:${PATH_LOCAL}:${PATH_NODE_LOCAL}:${PATH_GO_LOCAL}:${PATH_DOOM}:${PATH}"
 export FPATH="/usr/share/zsh/site-contrib:${FPATH}"
 export GOPATH=$HOME/.local/go
 export EDITOR="vim"

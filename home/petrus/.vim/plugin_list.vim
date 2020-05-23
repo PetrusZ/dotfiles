@@ -119,7 +119,7 @@ Plug 'skywind3000/vim-cppman'
 
 " vimwiki/Org-mode
 Plug 'vimwiki/vimwiki'
-" Plug 'jceb/vim-orgmode'
+Plug 'jceb/vim-orgmode'
 " Plug 'tpope/vim-speeddating'
 " Plug 'mattn/calendar-vim'
 " Plug 'tpope/vim-repeat'

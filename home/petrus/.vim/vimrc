@@ -360,7 +360,7 @@ set wildmenu                                        " 在编辑命令行时，�
 set autochdir                                       " 将当前路径自动切换到当前编辑的文件所在的目录
 set noshowmode                                      " 关闭mode在cmd中的提示，方便echodoc显示
 set lazyredraw                                      " 延迟绘制（提升性能）
-set bs=eol,start,indent                             " 设置 Backspace 键模式
+set backspace=eol,start,indent                      " 设置 Backspace 键模式
 set errorformat+=[%f:%l]\ ->\ %m,[%f:%l]:%m         " 错误格式
 set listchars=tab:\|\ ,trail:.,extends:>,precedes:< " 设置分隔符可视
 set formatoptions+=m                                " 如遇Unicode值大于255的文本，不必等到空格再折行
@@ -503,6 +503,7 @@ nnoremap k gk
 
 " emacs shortcut
 inoremap <C-c> <ESC>
+inoremap <C-g> <ESC>
 inoremap <C-a> <HOME>
 inoremap <C-e> <END>
 inoremap <C-f> <Right>

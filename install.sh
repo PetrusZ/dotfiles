@@ -36,9 +36,6 @@ if [[ $1 == 'user' ]]; then
 
         # Open vim and type `:PlugInstall`
 
-        # install tmux plugin
-        mkdir_ifnot_exist ~/.tmux/plugins
-        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
         # Open tmux and press prefix + I (capital i, as in Install) to fetch the plugin.
 
         # Enable systemd user services

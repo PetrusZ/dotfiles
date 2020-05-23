@@ -71,7 +71,7 @@
         }
     ],
     "explorer.keyMappings": {
-        "<esc>": "unmap"
+        "<esc>": false
     },
 
     "coc.source.around.firstMatch": false,

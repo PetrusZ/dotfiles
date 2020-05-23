@@ -1,9 +1,9 @@
 [core]
     ; gitproxy = socks5://192.168.2.1:23456
 [http]
-	; proxy = socks5://192.168.2.1:23456
+	proxy = socks5://192.168.2.1:23456
 [https]
-	; proxy = socks5://192.168.2.1:23456
+	proxy = socks5://192.168.2.1:23456
 [alias]
 	st = status
 	co = checkout
