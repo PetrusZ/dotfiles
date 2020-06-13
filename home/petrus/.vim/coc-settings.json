@@ -145,6 +145,7 @@
     },
 
     "yank.highlight.enable": false,
+    "leetcode.language":"cpp",
     "translator.engines": [
         "google",
         "youdao",
