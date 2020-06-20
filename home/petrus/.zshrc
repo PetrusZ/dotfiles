@@ -30,6 +30,7 @@ antigen bundle z
 
 # Other plugins
 # antigen bundle b4b4r07/enhancd
+antigen bundle Aloxaf/fzf-tab
 antigen bundle djui/alias-tips
 antigen bundle andrewferrier/fzf-z
 antigen bundle paulirish/git-open
@@ -37,7 +38,6 @@ antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-history-substring-search
-antigen bundle Aloxaf/fzf-tab
 
 
 # Load the theme.

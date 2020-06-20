@@ -1592,4 +1592,8 @@ let g:AutoPairsShortcutFastWrap = '<M-e>'
 
 " ranger.vim
 let g:ranger_map_keys = 0
+
+" vim-terminal-help
+let g:terminal_height = 20
+let g:terminal_close = 1
 " -----------------------------------------------------------------------------"}}}
