@@ -40,5 +40,5 @@ if [[ $1 == 'user' ]]; then
 
         # Enable systemd user services
         systemctl enable --user mpd
-        systemctl enable --user aria2c
+        systemctl enable --user aria2
 fi
