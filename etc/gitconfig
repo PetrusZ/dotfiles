@@ -16,5 +16,8 @@
 	email = silencly07@gmail.com
 	name = Petrus.Z
 	signingkey = 71B321E14F898C3D
+[pull]
+	ff = only
+	rebase = true
 [commit]
 	gpgsign = true
