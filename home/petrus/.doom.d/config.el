@@ -127,7 +127,7 @@ recommended
 (setq org-publish-project-alist
     '(
       ("blog-notes"
-       :base-directory "~/Documents/org"
+       :base-directory "~/Documents/org/src/"
        :base-extension "org"
        :publishing-directory "~/Documents/org/publish/"
        :recursive t
@@ -155,7 +155,7 @@ recommended
        :language "zh-CN"
        )
       ("blog-static"
-       :base-directory "~/Documents/org/pics"
+       :base-directory "~/Documents/org/src/pics/"
        :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
        :publishing-directory "~/Documents/org/publish/pics"
        :recursive t
