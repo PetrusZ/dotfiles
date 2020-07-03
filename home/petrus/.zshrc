@@ -143,6 +143,8 @@ alias glances='glances --enable-plugin connections,diskio,docker,cloud,floders,f
 
 alias proxychains='proxychains -q'
 
+alias aria2c='aria2c --no-conf=true'
+
 unalias fd
 # -----------------------------------------------------------------------------"}}}
 
