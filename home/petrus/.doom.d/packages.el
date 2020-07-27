@@ -52,3 +52,5 @@
 (package! cnfonts)
 (package! org-static-blog
   :recipe (:host github :repo "bastibe/org-static-blog"))
+(package! org-cliplink
+  :recipe (:host github :repo "rexim/org-cliplink"))

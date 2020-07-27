@@ -114,7 +114,6 @@ recommended
 (define-key key-translation-map [?\C-i] 'me/translate-C-i)
 (map! [C-i] #'better-jumper-jump-forward)
 
-
 (setq org-file-apps
       (quote
        ((auto-mode . emacs)
@@ -122,11 +121,14 @@ recommended
         ("\\.x?html?\\'" . "chromium-browser %s")
         ("\\.pdf\\'" . default))))
 
+;; (setq org-capture-templates
+;;    '(("K" "Cliplink capture task" entry (file "")
+;;       "* TODO %(org-cliplink-capture) \n  SCHEDULED: %t\n" :empty-lines 1)))
 
 (setq org-publish-use-timestamps-flag t)
 (setq org-publish-project-alist
     '(
-      ("blog-notes"
+      ("site-orgs"
        :base-directory "~/Documents/org/src/"
        :base-extension "org"
        :publishing-directory "~/Documents/org/publish/"
@@ -154,14 +156,14 @@ recommended
        :html-head-extra "<style> #content{max-width:1400px;}</style>"
        :language "zh-CN"
        )
-      ("blog-static"
+      ("site-static"
        :base-directory "~/Documents/org/src/pics/"
        :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
        :publishing-directory "~/Documents/org/publish/pics"
        :recursive t
        :publishing-function org-publish-attachment
        )
-      ("blog" :components ("blog-notes" "blog-static"))
+      ("site" :components ("site-orgs" "site-static"))
       ;;
       ))
 
@@ -199,44 +201,3 @@ recommended
 ;;   <a href=\"https://codeplayer.org.org/archive.html\">Other posts</a>
 ;; </div>
 ;; <center><a rel=\"license\" href=\"https://creativecommons.org/licenses/by-sa/3.0/\"><img alt=\"Creative Commons License\" style=\"border-width:0\" src=\"https://i.creativecommons.org/l/by-sa/3.0/88x31.png\" /></a><br /><span xmlns:dct=\"https://purl.org/dc/terms/\" href=\"https://purl.org/dc/dcmitype/Text\" property=\"dct:title\" rel=\"dct:type\">bastibe.de</span> by <a xmlns:cc=\"https://creativecommons.org/ns#\" href=\"https://bastibe.de\" property=\"cc:attributionName\" rel=\"cc:attributionURL\">Bastian Bechtold</a> is licensed under a <a rel=\"license\" href=\"https://creativecommons.org/licenses/by-sa/3.0/\">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.</center>")
-
-;; (use-package ox-publish
-;;   :defer t
-;;   :init
-;;   (setq org-html-validation-link nil)
-
-;;   ;; nil: do not checking and always publish all file
-;;   ;; Non-nil(t): use timestamp checking, default set 't'
-;;   (setq org-publish-use-timestamps-flag t)
-
-;;   (setq org-html-postamble t
-;;         org-html-postamble-format
-;;         '(("en" "<p class=\"postamble\">First created: %d <br />Last updated: %C <br />Power by %c</p>")))
-
-;;   (setq org-publish-project-alist
-;;         '(
-;;           ;; notes component
-;;           ("site-orgs"
-;;            :base-directory "~/Documents/org"
-;;            :base-extension "org"
-;;            :html-link-home "index.html"
-;;            :publishing-directory "~/site-html/"
-;;            :recursive t
-;;            :publishing-function org-html-publish-to-html
-;;            :headline-levels 5
-;;            :auto-sitemap t
-;;            :sitemap-filename "sitemap.org"
-;;            :sitemap-title "Sitemap"
-;;            )
-;;           ;; static component
-;;           ("site-static"
-;;            :base-directory "~/Documents/org/pics/"
-;;            :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
-;;            :publishing-directory "~/site-html/pics/"
-;;            :recursive t
-;;            :publishing-function org-publish-attachment
-;;            )
-;;           ;; publish component
-;;           ("site" :components ("site-orgs" "site-static"))
-;;           ))
-;;   )
