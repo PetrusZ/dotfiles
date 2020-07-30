@@ -96,6 +96,8 @@ recommended
 (map! :ne "<f3>" 'neotree-toggle)
 (map! :i "C-g" 'evil-normal-state)
 (map! :i "C-h" 'evil-delete-backward-char-and-join)
+(map! :nv "j" `evil-next-visual-line)
+(map! :nv "k" `evil-previous-visual-line)
 
 ; (define-key evil-normal-state-map (kbd "<f3>") 'neotree-toggle)
 ; (global-set-key (kbd "<f1>") 'func)
