@@ -1208,6 +1208,7 @@ let g:startify_bookmarks = [
             \ {'z': '~/.zshrc'},
             \ {'i': '~/.config/i3/config'},
             \ {'t': '~/.tmux.conf'},
+            \ {'a': '~/.config/alacritty/alacritty.yml'},
             \ {'p': '/etc/portage/make.conf'},
             \ {'m': '/etc/portage/package.mask'},
             \ {'u': '/etc/portage/package.use/default'},
