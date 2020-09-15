@@ -50,6 +50,10 @@
 ; ;; If you want to replace it with yasnippet's default snippets
 ; (package! yasnippet-snippets)
 (package! cnfonts)
+(package! rime)
+(package! posframe)
+(package! pyim
+  :disable t)
 (package! org-static-blog
   :recipe (:host github :repo "bastibe/org-static-blog"))
 (package! org-cliplink

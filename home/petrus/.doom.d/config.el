@@ -54,6 +54,10 @@
 
 ; (setq evil-org-key-theme '(textobjects insert navigation additional shift todo heading))
 
+(setq default-input-method "rime")
+(setq rime-show-candidate 'posframe)
+(setq rime-user-data-dir "~/.doom.d/etc/rime")
+
 (load! "fonts")
 
 ;; https://blog.csdn.net/xh_acmagic/article/details/78939246
@@ -71,7 +75,7 @@
 ;;     ))
 
 ;; (defun +my|init-font(frame)
-;;   (with-selected-frame frame
+
 ;;     (if (display-graphic-p)
 ;;         (+my/better-font))))
 
@@ -98,6 +102,7 @@ recommended
 (map! :i "C-h" 'evil-delete-backward-char-and-join)
 (map! :nv "j" `evil-next-visual-line)
 (map! :nv "k" `evil-previous-visual-line)
+(map! :i "S-SPC" 'toggle-input-method)
 
 ; (define-key evil-normal-state-map (kbd "<f3>") 'neotree-toggle)
 ; (global-set-key (kbd "<f1>") 'func)
