@@ -104,6 +104,9 @@ recommended
 (map! :nv "k" `evil-previous-visual-line)
 (map! :i "S-SPC" 'toggle-input-method)
 
+(autoload 'cmake-font-lock-activate "cmake-font-lock" nil t)
+(add-hook 'cmake-mode-hook 'cmake-font-lock-activate)
+
 ; (define-key evil-normal-state-map (kbd "<f3>") 'neotree-toggle)
 ; (global-set-key (kbd "<f1>") 'func)
 

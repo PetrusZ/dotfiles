@@ -54,6 +54,7 @@
 (package! posframe)
 (package! pyim
   :disable t)
+(package! cmake-font-lock)
 (package! org-static-blog
   :recipe (:host github :repo "bastibe/org-static-blog"))
 (package! org-cliplink
