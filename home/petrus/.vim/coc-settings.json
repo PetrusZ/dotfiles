@@ -70,7 +70,7 @@
             "expand": true
         }
     ],
-    "explorer.keyMappings": {
+    "explorer.keyMappings.global": {
         "<esc>": false
     },
 
@@ -78,9 +78,6 @@
     "coc.source.buffer.firstMatch": false,
     "coc.preferences.formatOnType": true,
     "coc.preferences.formatOnTypeFiletypes": [
-        "python"
-    ],
-    "coc.preferences.formatOnSaveFiletypes": [
         "python"
     ],
     "coc.preferences.snippetStatusText": "Ⓢ ",

@@ -461,6 +461,9 @@ augroup Petrus
         " \ | undojoin | Neoformat
         " \ | endif
 
+    " Add missing go imports on save
+    autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
+
     " mutt
     autocmd BufRead /tmp/neomutt-* set textwidth=72 | set colorcolumn=72
 

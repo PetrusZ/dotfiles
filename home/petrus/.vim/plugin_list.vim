@@ -148,6 +148,7 @@ let g:coc_global_extensions = [
             \ 'coc-ecdict',
             \ 'coc-explorer',
             \ 'coc-git',
+            \ 'coc-go',
             \ 'coc-html',
             \ 'coc-json',
             \ 'coc-lists',
