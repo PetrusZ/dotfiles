@@ -102,10 +102,12 @@ recommended
 (map! :i "C-h" 'evil-delete-backward-char-and-join)
 (map! :nv "j" `evil-next-visual-line)
 (map! :nv "k" `evil-previous-visual-line)
-(map! :i "S-SPC" 'toggle-input-method)
+(map! :g "C-/" 'toggle-input-method)
 
 (autoload 'cmake-font-lock-activate "cmake-font-lock" nil t)
 (add-hook 'cmake-mode-hook 'cmake-font-lock-activate)
+
+; (add-hook 'org-mode-hook #'valign-mode)
 
 ; (define-key evil-normal-state-map (kbd "<f3>") 'neotree-toggle)
 ; (global-set-key (kbd "<f1>") 'func)
